@@ -110,5 +110,4 @@ int main(void) {
 		printf("function4(%d) = %d\n", i, function4(i));
 	}
 
-	printf("For git");
 }
