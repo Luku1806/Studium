@@ -10,7 +10,7 @@ int main(int argc, char* argv[]) {
 		str = argv[1];
 		/* 2) Zahl aus einer Zeichenkette berechnen. */
 		x = stringTOint(str);
-		printf("Zeichenkette 678\"%s\" als int: %d\n", str, x);
+		printf("Zeichenkette \"%s\" als int: %d\n", str, x);
 		/* 3) Zahl als Binaerzeichenkette darstellen */
 		intTObinaer(x, puffer);
 		printf("Zahl int: %d als Binaerzahl: %s\n", x, puffer);
