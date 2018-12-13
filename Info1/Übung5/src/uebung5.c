@@ -109,4 +109,6 @@ int main(void) {
 	for (int i = 1; i < 8; i++) {
 		printf("function4(%d) = %d\n", i, function4(i));
 	}
+
+	printf("For git");
 }
