@@ -55,7 +55,7 @@ int main(int argc, char **argv)
     /* Generate random numbers <100 */
     for(i = 0; i < kElements; i++)
     {
-        a[i].p = random() % 100;
+        a[i].p = rand() % 100;
     }
 
     for(i = 0; i < 100; i++)
