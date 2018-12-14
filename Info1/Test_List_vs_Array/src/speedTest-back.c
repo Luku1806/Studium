@@ -49,7 +49,7 @@ int main(int argc, char **argv)
             printf("%c%c%c]",8,8,progress[(i/100) % 4]);
             fflush(stdout);
         }
-        a[i].p = random() % 100;
+        a[i].p = rand() % 100;
     }
     printf("\n\nTiming...\n");
     /* Generate random numbers <100 */
