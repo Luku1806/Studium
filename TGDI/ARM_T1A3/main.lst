@@ -1,0 +1,169 @@
+   1              		.file	"main.c"
+   9              	.Ltext0:
+  10              		.align	2
+  11              		.global	delay5ms
+  13              	delay5ms:
+  14              	.LFB2:
+  15              		.file 1 "main.c"
+   1:main.c        **** //********************************************************************
+   2:main.c        **** // ARM_T1A1										Version 02.04.2012 hpw
+   3:main.c        **** //********************************************************************
+   4:main.c        **** #include	"include/AT91SAM7S64.h"			// Definition von ARM7 typischen Registern etc.
+   5:main.c        **** 
+   6:main.c        **** #define		LED1	AT91C_PIO_PA30			// Parallel Input Output Control Pin 30
+   7:main.c        **** #define		LED2	AT91C_PIO_PA2
+   8:main.c        **** #define		LED3	AT91C_PIO_PA28
+   9:main.c        **** #define		LED4	AT91C_PIO_PA17
+  10:main.c        **** #define		LED5	AT91C_PIO_PA18
+  11:main.c        **** 
+  12:main.c        **** //**************************************************************
+  13:main.c        **** // delay5ms(uiK) verzögert um ca. uiK * 5ms
+  14:main.c        **** //**************************************************************
+  15:main.c        **** void delay5ms(unsigned int uiK) {
+  16              	 args = 0, pretend = 0, frame = 8
+  17              		@ frame_needed = 1, uses_anonymous_args = 0
+  18              		mov	ip, sp
+  19 0000 0DC0A0E1 	.LCFI0:
+  20              		stmfd	sp!, {fp, ip, lr, pc}
+  21 0004 00D82DE9 	.LCFI1:
+  22              		sub	fp, ip, #4
+  23 0008 04B04CE2 	.LCFI2:
+  24              		sub	sp, sp, #8
+  25 000c 08D04DE2 	.LCFI3:
+  26              		str	r0, [fp, #-20]
+  27 0010 14000BE5 		b	.L2
+  28 0014 0A0000EA 	.L5:
+  29              		.loc 1 19 0
+  16:main.c        **** lay5ms(unsigned int uiK) {
+  17:main.c        **** 	volatile unsigned int uiI;
+  18:main.c        **** 
+  19:main.c        **** 	while (uiK--)				// folgende for-Schleife wird uiK-mal aufgerufen
+  30              	tr	r3, [fp, #-16]
+  31 0018 0030A0E3 		b	.L3
+  32 001c 10300BE5 	.L4:
+  33 0020 020000EA 		ldr	r3, [fp, #-16]
+  34              		add	r3, r3, #1
+  35 0024 10301BE5 		str	r3, [fp, #-16]
+  36 0028 013083E2 	.L3:
+  37 002c 10300BE5 		ldr	r2, [fp, #-16]
+  38              		mov	r3, #8128
+  39 0030 10201BE5 		add	r3, r3, #63
+  40 0034 7F3DA0E3 		cmp	r2, r3
+  41 0038 3F3083E2 		bls	.L4
+  42 003c 030052E1 	.L2:
+  43 0040 F7FFFF9A 		.loc 1 18 0
+  44              		ldr	r3, [fp, #-20]
+  45              		cmp	r3, #0
+  46 0044 14301BE5 		moveq	r3, #0
+  47 0048 000053E3 		movne	r3, #1
+  48 004c 0030A003 		and	r2, r3, #255
+  49 0050 0130A013 		ldr	r3, [fp, #-20]
+  50 0054 FF2003E2 		sub	r3, r3, #1
+  51 0058 14301BE5 		str	r3, [fp, #-20]
+  52 005c 013043E2 		cmp	r2, #0
+  53 0060 14300BE5 		bne	.L5
+  54 0064 000052E3 		.loc 1 22 0
+  55 0068 EAFFFF1A 		sub	sp, fp, #12
+  20:main.c        **** wird uiK-mal aufgerufen
+  21:main.c        **** 		for (uiI = 0; uiI < 8192; uiI++)
+  22:main.c        **** 			;		//  for-Schleife wird 8192-mal durchlaufen. Dies
+  56              	FE2:
+  58 0070 00A89DE8 		.align	2
+  59              		.global	main
+  61              	main:
+  62              	.LFB3:
+  63              		.loc 1 27 0
+  64              		@ args = 0, pretend = 0, frame = 4
+  65              		@ frame_needed = 1, uses_anonymous_args = 0
+  23:main.c        **** mal durchlaufen. Dies
+  24:main.c        **** 					//  verursacht eine Zeitverzögerung von ca. 5ms.
+  25:main.c        **** }
+  26:main.c        **** 
+  27:main.c        **** //**************************************************************
+  66              	p
+  67              	.LCFI4:
+  68              		stmfd	sp!, {fp, ip, lr, pc}
+  69 0074 0DC0A0E1 	.LCFI5:
+  70              		sub	fp, ip, #4
+  71 0078 00D82DE9 	.LCFI6:
+  72              		sub	sp, sp, #4
+  73 007c 04B04CE2 	.LCFI7:
+  74              		.loc 1 28 0
+  75 0080 04D04DE2 		mov	r3, #120
+  76              		strb	r3, [fp, #-13]
+  28:main.c        **** *****************
+  77              	0
+  78 0084 7830A0E3 		mov	r2, #-1610612736
+  79 0088 0D304BE5 		mov	r2, r2, asr #19
+  29:main.c        **** *****************
+  80              	v	r3, #1342177284
+  81 008c 0A22A0E3 		add	r3, r3, #393216
+  82 0090 C229A0E1 		str	r3, [r2, #16]
+  83 0094 4532A0E3 		.loc 1 30 0
+  84 0098 063883E2 		mov	r2, #-1610612736
+  85 009c 103082E5 		mov	r2, r2, asr #19
+  30:main.c        **** *****************
+  86              	3, #1342177284
+  87 00a0 0A22A0E3 		add	r3, r3, #393216
+  88 00a4 C229A0E1 		str	r3, [r2, #96]
+  89 00a8 4532A0E3 		.loc 1 31 0
+  90 00ac 063883E2 		mov	r2, #-1610612736
+  91 00b0 603082E5 		mov	r2, r2, asr #19
+  31:main.c        **** *****************
+  92              	3, #1342177284
+  93 00b4 0A22A0E3 		add	r3, r3, #393216
+  94 00b8 C229A0E1 		str	r3, [r2, #160]
+  95 00bc 4532A0E3 		.loc 1 32 0
+  96 00c0 063883E2 		mov	r2, #-1610612736
+  97 00c4 A03082E5 		mov	r2, r2, asr #19
+  32:main.c        **** *****************
+  98              	3, #1342177280
+  99 00c8 0A22A0E3 		add	r3, r3, #262144
+ 100 00cc C229A0E1 		str	r3, [r2, #56]
+ 101 00d0 0532A0E3 		b	.L8
+ 102 00d4 013783E2 	.L9:
+ 103 00d8 383082E5 		.loc 1 35 0
+ 104 00dc 0A0000EA 		mov	r2, #-1610612736
+ 105              		mov	r2, r2, asr #19
+  33:main.c        **** *****************
+  34:main.c        **** // main läßt LED am Port P30 für ca. 1 Minute mit 1 Hz blinken
+  35:main.c        **** //**************************************************************
+ 106              	 #-1610612736
+ 107 00e0 0A22A0E3 		mov	r3, r3, asr #19
+ 108 00e4 C229A0E1 		ldr	r1, [r3, #56]
+ 109 00e8 0A32A0E3 		mov	r3, #1342177284
+ 110 00ec C339A0E1 		add	r3, r3, #393216
+ 111 00f0 381093E5 		eor	r3, r1, r3
+ 112 00f4 4532A0E3 		str	r3, [r2, #56]
+ 113 00f8 063883E2 		.loc 1 36 0
+ 114 00fc 033021E0 		mov	r0, #100
+ 115 0100 383082E5 		bl	delay5ms
+  36:main.c        **** ***************
+ 116              	 1 34 0
+ 117 0104 6400A0E3 		ldrb	r3, [fp, #-13]	@ zero_extendqisi2
+ 118 0108 FEFFFFEB 		cmp	r3, #0
+ 119              		moveq	r3, #0
+ 120              		movne	r3, #1
+ 121 010c 0D305BE5 		and	r2, r3, #255
+ 122 0110 000053E3 		ldrb	r3, [fp, #-13]
+ 123 0114 0030A003 		sub	r3, r3, #1
+ 124 0118 0130A013 		strb	r3, [fp, #-13]
+ 125 011c FF2003E2 		cmp	r2, #0
+ 126 0120 0D305BE5 		bne	.L9
+ 127 0124 013043E2 	.L10:
+ 128 0128 0D304BE5 		b	.L10
+ 129 012c 000052E3 	.LFE3:
+ 131              		.section	.debug_frame,"",%progbits
+ 132 0134 FEFFFFEA 	.Lframe0:
+ 133              		.4byte	.LECIE0-.LSCIE0
+ 134              	.LSCIE0:
+ 201              		.4byte	.LFB2-.Ltext0
+DEFINED SYMBOLS
+                            *ABS*:00000000 main.c
+C:\Users\LUKASR~1\AppData\Local\Temp/ccYp3YQf.s:13     .text:00000000 delay5ms
+C:\Users\LUKASR~1\AppData\Local\Temp/ccYp3YQf.s:19     .text:00000000 $a
+C:\Users\LUKASR~1\AppData\Local\Temp/ccYp3YQf.s:64     .text:00000074 main
+C:\Users\LUKASR~1\AppData\Local\Temp/ccYp3YQf.s:137    .debug_frame:00000000 $d
+C:\Users\LUKASR~1\AppData\Local\Temp/ccYp3YQf.s:205    .debug_loc:00000000 $d
+
+NO UNDEFINED SYMBOLS
