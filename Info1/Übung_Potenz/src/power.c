@@ -12,6 +12,7 @@ int power(int n, int x) {
 	return n * power(n, x - 1);
 }
 
+
 int main(void) {
 	int p = power(5,3);
 	printf("Power: %d", p);
