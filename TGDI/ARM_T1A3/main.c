@@ -32,7 +32,7 @@ int main() {
 	AT91C_BASE_PIOA->PIO_ODSR = (LED1 | LED3 | LED5);
 
 	while (ucB--) {
-		AT91C_BASE_PIOA->PIO_ODSR = AT91C_BASE_PIOA->PIO_ODSR ^ (LED1 | LED2 | LED3 | LED4 | LED5);
+		AT91C_BASE_PIOA->PIO_ODSR ^= (LED1 | LED2 | LED3 | LED4 | LED5);
 		delay5ms(100);						// Verzögerung von 500ms
 	}
 
