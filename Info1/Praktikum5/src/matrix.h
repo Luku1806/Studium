@@ -36,13 +36,23 @@ Matrix matcpy(Matrix m);
  */
 Matrix matunity(int rows, int cols);
 
+/**
+ * Fill matrix with two dimensional array
+ */
+void matfill(Matrix *m, double *data[]);
+
+/**
+ * Prints a Matrix
+ */
+void matprint(Matrix m);
+
 /** Addition/multiplication like before */
 Matrix matplus(Matrix A, Matrix B);
 
 Matrix matmul(Matrix A, Matrix B);
 
 /**
- *  Calculate the k-th power A**k of matrix A,
+ * Calculate the k-th power A**k of matrix A,
  * returning the result, optimized version.
  * @param A the input matrix
  * @param k the power coefficient

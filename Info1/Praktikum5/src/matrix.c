@@ -21,10 +21,10 @@ Matrix * newMatrix(int rows, int cols) {
 
 	// allocate data pointers
 	//allocate memory for rows
-	m->data = (double **) malloc(rows * sizeof(double));
+	m->data = (double **) malloc(rows * sizeof(double*));
 	//for each row allocate memory for columns
 	for (int i = 0; i < rows; i++) {
-		m->data[i] = (double *) malloc(cols * sizeof(int));
+		m->data[i] = (double *) malloc(cols * sizeof(double));
 	}
 
 	// set all data to 0
@@ -64,6 +64,24 @@ Matrix matunity(int rows, int cols) {
 	return *unity;
 }
 
+void matfill(Matrix *m, double* data[]) {
+	for (int i = 0; i < m->rows; i++) {
+		for (int j = 0; j < m->cols; j++) {
+			m->data[i][j] = data[i][j];
+		}
+	}
+}
+
+void matprint(Matrix m) {
+	for (int i = 0; i < m.rows; i++) {
+		for (int j = 0; j < m.cols; j++) {
+			printf("% f\t", m.data[i][j]);
+		}
+		printf("\n");
+	}
+	printf("\n");
+}
+
 Matrix matplus(Matrix A, Matrix B) {
 	if (A.rows != B.rows || A.cols != B.cols) {
 		printf(
@@ -80,36 +98,50 @@ Matrix matplus(Matrix A, Matrix B) {
 	return *result;
 }
 
-Matrix matmult(Matrix A, Matrix B) {
-	if (A.rows != B.cols) {
+Matrix matmul(Matrix A, Matrix B) {
+	if (A.cols != B.rows) {
 		printf(
-				"Die Anzahl an Zeilen von Matrix A muess mit der Anzahl der Spalten von Matrix B uebereinstimmen!");
+				"Die Anzahl an Spalten von Matrix A muss mit der Anzahl der Zeilen von Matrix B uebereinstimmen!");
 		exit(-1);
 	}
-	Matrix *result = newMatrix(A.rows, A.cols);
+	Matrix *result = newMatrix(A.rows, B.cols);
 	//Multiplication
 	for (int i = 0; i < A.rows; i++) {
 		for (int j = 0; j < B.cols; j++) {
 			for (int k = 0; k < B.rows; k++) {
-				result->data[i][j] = A.data[i][k] + B.data[k][j];
+				result->data[i][j] += A.data[i][k] * B.data[k][j];
 			}
 		}
 	}
 	return *result;
 }
 
+Matrix matpow(Matrix A, unsigned int k) {
+	int q = k / 2;
+	if (k == 0) {
+		return matunity(A.rows, A.cols);
+	} else if (k == 1) {
+		return A;
+	} else if (k % 2 == 0) {
+		Matrix b = matpow(A, q);
+		return matmul(b, b);
+	} else if (k % 2 == 1) {
+		Matrix b = matpow(A, q);
+		return matmul(matmul(b, b), A);
+	}
+}
+
 Matrix matpowR(Matrix A, unsigned int k) {
-	if (k == 1) {
-		//TODO Einheitsmatrix return
+	if (k == 0) {
 		return matunity(A.rows, A.cols);
 	}
-	return matmult(A, matpowR(A, k - 1));
+	return matmul(A, matpowR(A, k - 1));
 }
 
 Matrix matpowI(Matrix A, unsigned int k) {
 	Matrix result = matcpy(A);
-	for (int i = 0; i < k; i++) {
-		result = matmult(result, A);
+	for (int i = 1; i < k; i++) {
+		result = matmul(result, A);
 	}
 	return result;
 }
