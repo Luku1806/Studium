@@ -57,6 +57,20 @@ Matrix matcpy(Matrix m) {
 	return *result;
 }
 
+char matcmp(Matrix a, Matrix b) {
+	if (a.cols != b.cols || a.rows != b.rows) {
+		return 0;
+	}
+	for (int i = 0; i < a.rows; i++) {
+		for (int j = 0; j < a.cols; j++) {
+			if (a.data[i][j] != b.data[i][j]) {
+				return 0;
+			}
+		}
+	}
+	return 1;
+}
+
 Matrix matunity(int rows, int cols) {
 	Matrix *unity = newMatrix(rows, cols);
 	for (int i = 0; i < rows; i++) {
