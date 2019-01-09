@@ -7,6 +7,7 @@
 
 #include "include/AT91SAM7S64.h"
 #include "include/display.h"
+#include "cToolMod.h"
 
 #define		BUTTON1	AT91C_PIO_PA1
 #define		BUTTON2	AT91C_PIO_PA0
