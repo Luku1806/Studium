@@ -50,15 +50,15 @@ double* E[] = { e1, e2, e3, e4, e5 };
 double* F[] = { f1, f2, f3 };
 double* RES[] = { res1, res2, res3 };
 
-Matrix matrixA, matrixB, matrixC, matrixD, matrixE, matrixF, matrixRES;
+Matrix *matrixA, *matrixB, *matrixC, *matrixD, *matrixE, *matrixF, *matrixRES;
 
 void test() {
-	matrixA = *newMatrix(sizeAx, sizeAy);
-	matrixB = *newMatrix(sizeBx, sizeBy);
-	matrixC = *newMatrix(3, 3);
-	matfill(&matrixA, A);
-	matfill(&matrixB, B);
-	matfill(&matrixC, B);
+	matrixA = newMatrix(sizeAx, sizeAy);
+	matrixB = newMatrix(sizeBx, sizeBy);
+	matrixC = newMatrix(3, 3);
+	matfill(matrixA, A);
+	matfill(matrixB, B);
+	matfill(matrixC, B);
 
 	printf("\n---------------Test---------------\n");
 
@@ -68,153 +68,152 @@ void test() {
 	matprint(matrixB);
 
 	printf("\n\nmatplus\n");
-	Matrix matRes1 = matplus(matrixA, matrixA);
+	Matrix *matRes1 = matplus(matrixA, matrixA);
 	matprint(matRes1);
 
 	printf("\nmatmul:\n");
-	Matrix matRes2 = matmul(matrixA, matrixB);
+	Matrix *matRes2 = matmul(matrixA, matrixB);
 	matprint(matRes2);
 
 	printf("\nmatpow:\n");
-	Matrix matRes3 = matpowI(matrixC, 3);
+	Matrix *matRes3 = matpowI(matrixC, 3);
 	matprint(matRes3);
 
 	printf("\nmatpowR:\n");
-	Matrix matRes4 = matpowI(matrixC, 3);
+	Matrix *matRes4 = matpowI(matrixC, 3);
 	matprint(matRes4);
 
 	printf("\nmatpowI:\n");
-	Matrix matRes5 = matpowI(matrixC, 2);
+	Matrix *matRes5 = matpowI(matrixC, 2);
 	matprint(matRes5);
 }
 
 void testCompare() {
-	matrixF = *newMatrix(sizeFx, sizeFy);
-	matrixRES = *newMatrix(3, 3);
-	matfill(&matrixF, F);
-	matfill(&matrixRES, RES);
+	matrixF = newMatrix(sizeFx, sizeFy);
+	matrixRES = newMatrix(3, 3);
+	matfill(matrixF, F);
+	matfill(matrixRES, RES);
 
 	printf("Res should be:\n");
 	matprint(matrixRES);
 
 	printf("Res^5:\n");
 	printf("\nmatpow:\n");
-	Matrix matRes1 = matpow(matrixF, 5);
+	Matrix *matRes1 = matpow(matrixF, 5);
 	matprint_prec(matRes1);
 	printf("\nAbsolute error: matpow:\n");
-	Matrix absE1 = matcmp(matRes1, matrixRES);
+	Matrix *absE1 = matcmp(matRes1, matrixRES);
 	matprint_prec(absE1);
 
 	printf("matpowR:\n");
-	Matrix matRes2 = matpowR(matrixF, 5);
+	Matrix *matRes2 = matpowR(matrixF, 5);
 	matprint_prec(matRes2);
 	printf("\nAbsolute error: matpow:\n");
-	Matrix absE2 = matcmp(matRes1, matrixRES);
+	Matrix *absE2 = matcmp(matRes1, matrixRES);
 	matprint_prec(absE2);
 
 	printf("matpowI:\n");
-	Matrix matRes3 = matpowI(matrixF, 5);
+	Matrix *matRes3 = matpowI(matrixF, 5);
 	matprint_prec(matRes3);
 	printf("\nAbsolute error: matpow:\n");
-	Matrix absE3 = matcmp(matRes1, matrixRES);
+	Matrix *absE3 = matcmp(matRes1, matrixRES);
 	matprint_prec(absE3);
 
-	delMatrix(&absE1);
-	delMatrix(&absE2);
-	delMatrix(&absE3);
-	delMatrix(&matRes1);
-	delMatrix(&matRes2);
-	delMatrix(&matRes3);
-	delMatrix(&matrixF);
-	delMatrix(&matrixRES);
+	delMatrix(absE1);
+	delMatrix(absE2);
+	delMatrix(absE3);
+	delMatrix(matRes1);
+	delMatrix(matRes2);
+	delMatrix(matRes3);
+	delMatrix(matrixF);
+	delMatrix(matrixRES);
 }
 
 void testPowers() {
-	matrixC = *newMatrix(sizeCx, sizeCy);
-	matrixD = *newMatrix(sizeDx, sizeDy);
-	matrixE = *newMatrix(sizeEx, sizeEy);
-	matrixF = *newMatrix(sizeFx, sizeFy);
-	matfill(&matrixC, C);
-	matfill(&matrixD, D);
-	matfill(&matrixE, E);
-	matfill(&matrixF, F);
+	matrixC = newMatrix(sizeCx, sizeCy);
+	matrixD = newMatrix(sizeDx, sizeDy);
+	matrixE = newMatrix(sizeEx, sizeEy);
+	matrixF = newMatrix(sizeFx, sizeFy);
+	matfill(matrixC, C);
+	matfill(matrixD, D);
+	matfill(matrixE, E);
+	matfill(matrixF, F);
 
 	//Matrix C^3
 	printf("C^3:\n");
 	printf("\nmatpow:\n");
-	Matrix matResC1 = matpow(matrixC, 3);
+	Matrix *matResC1 = matpow(matrixC, 3);
 	matprint(matResC1);
 
 	printf("matpowR:\n");
-	Matrix matResC2 = matpowR(matrixC, 3);
+	Matrix *matResC2 = matpowR(matrixC, 3);
 	matprint(matResC2);
 
 	printf("matpowI:\n");
-	Matrix matResC3 = matpowI(matrixC, 3);
+	Matrix *matResC3 = matpowI(matrixC, 3);
 	matprint(matResC3);
 
 	//Matrix D ^ 8
 	printf("\nD^8:\n");
 	printf("matpow:\n");
-	Matrix matResD1 = matpow(matrixD, 8);
+	Matrix *matResD1 = matpow(matrixD, 8);
 	matprint(matResD1);
 
 	printf("matpowR:\n");
-	Matrix matResD2 = matpowR(matrixD, 8);
+	Matrix *matResD2 = matpowR(matrixD, 8);
 	matprint(matResD2);
 
 	printf("matpowI:\n");
-	Matrix matResD3 = matpowI(matrixD, 8);
+	Matrix *matResD3 = matpowI(matrixD, 8);
 	matprint(matResD3);
 
 	//Matrix E^1-6
 	for (int i = 1; i <= 6; i++) {
 		printf("\nE^%d:\n", i);
 		printf("matpow:\n");
-		Matrix matResE1 = matpow(matrixE, i);
+		Matrix *matResE1 = matpow(matrixE, i);
 		matprint(matResE1);
 
 		printf("matpowR:\n");
-		Matrix matResE2 = matpowR(matrixE, i);
+		Matrix *matResE2 = matpowR(matrixE, i);
 		matprint(matResE2);
 
 		printf("matpowI:\n");
-		Matrix matResE3 = matpowI(matrixE, i);
+		Matrix *matResE3 = matpowI(matrixE, i);
 		matprint(matResE3);
 
-		delMatrix(&matResE1);
-		delMatrix(&matResE2);
-		delMatrix(&matResE3);
+		delMatrix(matResE1);
+		delMatrix(matResE2);
+		delMatrix(matResE3);
 	}
-
 	//Matrix F^5
 	printf("\nF^5:\n");
 	printf("matpow:\n");
-	Matrix matResF1 = matpow(matrixF, 5);
+	Matrix *matResF1 = matpow(matrixF, 5);
 	matprint(matResF1);
 
 	printf("matpowR:\n");
-	Matrix matResF2 = matpowR(matrixF, 5);
+	Matrix *matResF2 = matpowR(matrixF, 5);
 	matprint(matResF2);
 
 	printf("matpowI:\n");
-	Matrix matResF3 = matpowI(matrixF, 5);
+	Matrix *matResF3 = matpowI(matrixF, 5);
 	matprint(matResF3);
 
-	delMatrix(&matResC1);
-	delMatrix(&matResC2);
-	delMatrix(&matResC3);
-	delMatrix(&matResD1);
-	delMatrix(&matResD2);
-	delMatrix(&matResD3);
-	delMatrix(&matResF1);
-	delMatrix(&matResF2);
-	delMatrix(&matResF3);
+	delMatrix(matResC1);
+	delMatrix(matResC2);
+	delMatrix(matResC3);
+	delMatrix(matResD1);
+	delMatrix(matResD2);
+	delMatrix(matResD3);
+	delMatrix(matResF1);
+	delMatrix(matResF2);
+	delMatrix(matResF3);
 
-	delMatrix(&matrixC);
-	delMatrix(&matrixD);
-	delMatrix(&matrixE);
-	delMatrix(&matrixF);
+	delMatrix(matrixC);
+	delMatrix(matrixD);
+	delMatrix(matrixE);
+	delMatrix(matrixF);
 }
 
 int main(int argc, char* argv[]) {

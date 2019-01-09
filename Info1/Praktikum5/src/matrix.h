@@ -19,7 +19,7 @@ typedef struct Matrix {
 /**
  * Matrix generation
  */
-Matrix * newMatrix(int rows, int cols);
+Matrix *newMatrix(int rows, int cols);
 
 /**
  * Matrix deletion
@@ -29,18 +29,18 @@ void delMatrix(Matrix *m);
 /**
  * Copy matrix
  */
-Matrix matcpy(Matrix m);
+Matrix *matcpy(Matrix *m);
 
 /**
  * Compare Matrix A with Matrix B
  * 0: A!=B, 1: A==B
  */
-Matrix matcmp(Matrix a, Matrix b);
+Matrix *matcmp(Matrix *a, Matrix *b);
 
 /**
  *unity matrix
  */
-Matrix matunity(int rows, int cols);
+Matrix *matunity(int rows, int cols);
 
 /**
  * Fill matrix with two dimensional array
@@ -50,17 +50,17 @@ void matfill(Matrix *m, double *data[]);
 /**
  * Prints a Matrix
  */
-void matprint(Matrix m);
+void matprint(Matrix *m);
 
 /**
  * Prints a matrix precisely
  */
-void matprint_prec(Matrix m);
+void matprint_prec(Matrix *m);
 
 /** Addition/multiplication like before */
-Matrix matplus(Matrix A, Matrix B);
+Matrix *matplus(Matrix *A, Matrix *B);
 
-Matrix matmul(Matrix A, Matrix B);
+Matrix *matmul(Matrix *A, Matrix *B);
 
 /**
  * Calculate the k-th power A**k of matrix A,
@@ -69,7 +69,7 @@ Matrix matmul(Matrix A, Matrix B);
  * @param k the power coefficient
  * @return the result A**k
  */
-Matrix matpow(Matrix A, unsigned int k);
+Matrix *matpow(Matrix *A, unsigned int k);
 
 /**
  * Calculate the k-th power A**k of matrix A,
@@ -78,7 +78,7 @@ Matrix matpow(Matrix A, unsigned int k);
  * @param k the power coefficient
  * @return the result A**k
  */
-Matrix matpowR(Matrix A, unsigned int k);
+Matrix *matpowR(Matrix *A, unsigned int k);
 
 /**
  * Calculate the k-th power A**k of matrix A,
@@ -87,6 +87,6 @@ Matrix matpowR(Matrix A, unsigned int k);
  * @param k the power coefficient
  * @return the result A**k
  */
-Matrix matpowI(Matrix A, unsigned int k);
+Matrix *matpowI(Matrix *A, unsigned int k);
 
 #endif /* MATRIX_H_ */
