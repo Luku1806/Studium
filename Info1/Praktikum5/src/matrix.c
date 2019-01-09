@@ -10,8 +10,10 @@
 #include <stdio.h>
 
 Matrix * newMatrix(int rows, int cols) {
-	if (rows <= 0 || cols <= 0)
+	if (rows <= 0 || cols <= 0) {
+		printf("Die Dimensionen der Matrix muessen mindestens 1x1 sein");
 		exit(-1);
+	}
 	// allocate a matrix structure
 	Matrix * m = (Matrix *) malloc(sizeof(Matrix));
 
@@ -38,6 +40,9 @@ Matrix * newMatrix(int rows, int cols) {
 }
 
 void delMatrix(Matrix *m) {
+	for (int i = 0; i < m->rows; i++) {
+		free(m->data[i]);
+	}
 	free(m->data);
 	free(m);
 }
@@ -121,14 +126,21 @@ Matrix matpow(Matrix A, unsigned int k) {
 	if (k == 0) {
 		return matunity(A.rows, A.cols);
 	} else if (k == 1) {
-		return A;
+		return matcpy(A);
 	} else if (k % 2 == 0) {
 		Matrix b = matpow(A, q);
-		return matmul(b, b);
+		Matrix result = matmul(b, b);
+		delMatrix(&b);
+		return result;
 	} else if (k % 2 == 1) {
 		Matrix b = matpow(A, q);
-		return matmul(matmul(b, b), A);
+		Matrix mult = matmul(b, b);
+		Matrix result = matmul(mult, A);
+		delMatrix(&b);
+		delMatrix(&mult);
+		return result;
 	}
+	return matunity(A.rows, A.cols);
 }
 
 Matrix matpowR(Matrix A, unsigned int k) {
@@ -141,7 +153,10 @@ Matrix matpowR(Matrix A, unsigned int k) {
 Matrix matpowI(Matrix A, unsigned int k) {
 	Matrix result = matcpy(A);
 	for (int i = 1; i < k; i++) {
-		result = matmul(result, A);
+		Matrix temp = matmul(result, A);
+		delMatrix(&result);
+		result = matcpy(temp);
+		delMatrix(&temp);
 	}
 	return result;
 }

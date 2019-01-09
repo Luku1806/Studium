@@ -95,71 +95,81 @@ void testPowers() {
 	matfill(&matrixF, F);
 
 	//Matrix C^3
-	printf("\nC^3:\n");
+	printf("C^3:\n");
 	printf("\nmatpow:\n");
 	Matrix matResC1 = matpow(matrixC, 3);
 	matprint(matResC1);
-	//delMatrix(&matResC1);
 
-	printf("\nmatpowR:\n");
+	printf("matpowR:\n");
 	Matrix matResC2 = matpowR(matrixC, 3);
 	matprint(matResC2);
-	//delMatrix(&matResC2);
 
-	printf("\nmatpowI:\n");
+	printf("matpowI:\n");
 	Matrix matResC3 = matpowI(matrixC, 3);
 	matprint(matResC3);
-	//delMatrix(&matResC3);
 
 	//Matrix D ^ 8
 	printf("\nD^8:\n");
-	printf("\nmatpow:\n");
+	printf("matpow:\n");
 	Matrix matResD1 = matpow(matrixD, 8);
 	matprint(matResD1);
-	//delMatrix(&matResD1);
 
-	printf("\nmatpowR:\n");
+	printf("matpowR:\n");
 	Matrix matResD2 = matpowR(matrixD, 8);
 	matprint(matResD2);
-	//delMatrix(&matResD2);
 
-	printf("\nmatpowI:\n");
+	printf("matpowI:\n");
 	Matrix matResD3 = matpowI(matrixD, 8);
 	matprint(matResD3);
-	//delMatrix(&matResD3);
 
 	//Matrix E^1-6
 	for (int i = 1; i <= 6; i++) {
 		printf("\nE^%d:\n", i);
-		printf("\nmatpow:\n");
+		printf("matpow:\n");
 		Matrix matResE1 = matpow(matrixE, i);
 		matprint(matResE1);
 
-		printf("\nmatpowR:\n");
+		printf("matpowR:\n");
 		Matrix matResE2 = matpowR(matrixE, i);
 		matprint(matResE2);
 
-		printf("\nmatpowI:\n");
+		printf("matpowI:\n");
 		Matrix matResE3 = matpowI(matrixE, i);
 		matprint(matResE3);
+
+		delMatrix(&matResE1);
+		delMatrix(&matResE2);
+		delMatrix(&matResE3);
 	}
 
 	//Matrix F^5
 	printf("\nF^5:\n");
-	printf("\nmatpow:\n");
+	printf("matpow:\n");
 	Matrix matResF1 = matpow(matrixF, 5);
 	matprint(matResF1);
-	//delMatrix(&matResF1);
 
-	printf("\nmatpowR:\n");
+	printf("matpowR:\n");
 	Matrix matResF2 = matpowR(matrixF, 5);
 	matprint(matResF2);
-	//delMatrix(&matResF2);
 
-	printf("\nmatpowI:\n");
+	printf("matpowI:\n");
 	Matrix matResF3 = matpowI(matrixF, 5);
 	matprint(matResF3);
-	//delMatrix(&matResF3);
+
+	delMatrix(&matResC1);
+	delMatrix(&matResC2);
+	delMatrix(&matResC3);
+	delMatrix(&matResD1);
+	delMatrix(&matResD2);
+	delMatrix(&matResD3);
+	delMatrix(&matResF1);
+	delMatrix(&matResF2);
+	delMatrix(&matResF3);
+
+	delMatrix(&matrixC);
+	delMatrix(&matrixD);
+	delMatrix(&matrixE);
+	delMatrix(&matrixF);
 }
 
 int main(int argc, char* argv[]) {
