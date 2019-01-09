@@ -18,7 +18,7 @@ void delay5ms(unsigned int uiK){
 }
 
 //**************************************************************
-// main läßt LED am Port P30 für ca. 1 Minute mit 1 Hz blinken
+// main läßt LED am Port P30 für ca. 1 Minute  mit 1 Hz blinken
 //**************************************************************
 int main(){
 	unsigned char ucB=60;					// lokale Variable ucB
