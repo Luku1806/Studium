@@ -33,8 +33,9 @@ Matrix matcpy(Matrix m);
 
 /**
  * Compare Matrix A with Matrix B
+ * 0: A!=B, 1: A==B
  */
-void matcmp(Matrix a, Matrix b);
+char matcmp(Matrix a, Matrix b);
 
 /**
  *unity matrix
