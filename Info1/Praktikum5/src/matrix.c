@@ -165,8 +165,8 @@ Matrix matpowR(Matrix A, unsigned int k) {
 }
 
 Matrix matpowI(Matrix A, unsigned int k) {
-	Matrix result = matcpy(A);
-	for (int i = 1; i < k; i++) {
+	Matrix result = matunity(A.rows, A.cols);
+	for (int i = 0; i < k; i++) {
 		Matrix temp = matmul(result, A);
 		delMatrix(&result);
 		result = matcpy(temp);
