@@ -35,7 +35,7 @@ Matrix matcpy(Matrix m);
  * Compare Matrix A with Matrix B
  * 0: A!=B, 1: A==B
  */
-char matcmp(Matrix a, Matrix b);
+Matrix matcmp(Matrix a, Matrix b);
 
 /**
  *unity matrix
@@ -51,6 +51,11 @@ void matfill(Matrix *m, double *data[]);
  * Prints a Matrix
  */
 void matprint(Matrix m);
+
+/**
+ * Prints a matrix precisely
+ */
+void matprint_prec(Matrix m);
 
 /** Addition/multiplication like before */
 Matrix matplus(Matrix A, Matrix B);

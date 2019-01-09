@@ -11,7 +11,6 @@
 int sizeAx = 5, sizeBx = 3, sizeCx = 3, sizeDx = 2, sizeEx = 5, sizeFx = 3;
 int sizeAy = 3, sizeBy = 4, sizeCy = 3, sizeDy = 2, sizeEy = 5, sizeFy = 3;
 
-
 double a1[] = { 0.5, -1.0, -1.0 };
 double a2[] = { -1.0, 1.0, 2.0 };
 double a3[] = { -1.0, 2.0, 1.0 };
@@ -39,14 +38,19 @@ double f1[] = { 0.5, -1.0, -1.0 };
 double f2[] = { -1.0, 1.0, 2.0 };
 double f3[] = { -1.0, 2.0, 1.0 };
 
+double res1[] = { 107.53125, -168.68750, -168.68750 };
+double res2[] = { -168.68750, 264.12500, 265.12500 };
+double res3[] = { -168.68750, 265.12500, 264.12500 };
+
 double* A[] = { a1, a2, a3, a4, a5 };
 double* B[] = { b1, b2, b3 };
 double* C[] = { c1, c2, c3 };
 double* D[] = { d1, d2 };
 double* E[] = { e1, e2, e3, e4, e5 };
 double* F[] = { f1, f2, f3 };
+double* RES[] = { res1, res2, res3 };
 
-Matrix matrixA, matrixB, matrixC, matrixD, matrixE, matrixF;
+Matrix matrixA, matrixB, matrixC, matrixD, matrixE, matrixF, matrixRES;
 
 void test() {
 	matrixA = *newMatrix(sizeAx, sizeAy);
@@ -82,6 +86,47 @@ void test() {
 	printf("\nmatpowI:\n");
 	Matrix matRes5 = matpowI(matrixC, 2);
 	matprint(matRes5);
+}
+
+void testCompare() {
+	matrixF = *newMatrix(sizeFx, sizeFy);
+	matrixRES = *newMatrix(3, 3);
+	matfill(&matrixF, F);
+	matfill(&matrixRES, RES);
+
+	printf("Res should be:\n");
+	matprint(matrixRES);
+
+	printf("Res^5:\n");
+	printf("\nmatpow:\n");
+	Matrix matRes1 = matpow(matrixF, 5);
+	matprint_prec(matRes1);
+	printf("\nAbsolute error: matpow:\n");
+	Matrix absE1 = matcmp(matRes1, matrixRES);
+	matprint_prec(absE1);
+
+	printf("matpowR:\n");
+	Matrix matRes2 = matpowR(matrixF, 5);
+	matprint_prec(matRes2);
+	printf("\nAbsolute error: matpow:\n");
+	Matrix absE2 = matcmp(matRes1, matrixRES);
+	matprint_prec(absE2);
+
+	printf("matpowI:\n");
+	Matrix matRes3 = matpowI(matrixF, 5);
+	matprint_prec(matRes3);
+	printf("\nAbsolute error: matpow:\n");
+	Matrix absE3 = matcmp(matRes1, matrixRES);
+	matprint_prec(absE3);
+
+	delMatrix(&absE1);
+	delMatrix(&absE2);
+	delMatrix(&absE3);
+	delMatrix(&matRes1);
+	delMatrix(&matRes2);
+	delMatrix(&matRes3);
+	delMatrix(&matrixF);
+	delMatrix(&matrixRES);
 }
 
 void testPowers() {
@@ -173,6 +218,7 @@ void testPowers() {
 }
 
 int main(int argc, char* argv[]) {
-	testPowers();
+	//testPowers();
+	testCompare();
 	return 0;
 }

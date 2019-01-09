@@ -57,18 +57,19 @@ Matrix matcpy(Matrix m) {
 	return *result;
 }
 
-char matcmp(Matrix a, Matrix b) {
+Matrix matcmp(Matrix a, Matrix b) {
+	Matrix* result = newMatrix(a.rows, a.cols);
 	if (a.cols != b.cols || a.rows != b.rows) {
-		return 0;
+		printf(
+				"Die Dimensionen der Matrix A muessen gleich der Dimensionene von B sein!");
+		exit(-1);
 	}
 	for (int i = 0; i < a.rows; i++) {
 		for (int j = 0; j < a.cols; j++) {
-			if (a.data[i][j] != b.data[i][j]) {
-				return 0;
-			}
+			result->data[i][j] = a.data[i][j] - b.data[i][j];
 		}
 	}
-	return 1;
+	return *result;
 }
 
 Matrix matunity(int rows, int cols) {
@@ -95,6 +96,17 @@ void matprint(Matrix m) {
 	for (int i = 0; i < m.rows; i++) {
 		for (int j = 0; j < m.cols; j++) {
 			printf("% f\t", m.data[i][j]);
+		}
+		printf("\n");
+	}
+	printf("\n");
+}
+
+
+void matprint_prec(Matrix m) {
+	for (int i = 0; i < m.rows; i++) {
+		for (int j = 0; j < m.cols; j++) {
+			printf("% .16f\t", m.data[i][j]);
 		}
 		printf("\n");
 	}
@@ -161,7 +173,10 @@ Matrix matpowR(Matrix A, unsigned int k) {
 	if (k == 0) {
 		return matunity(A.rows, A.cols);
 	}
-	return matmul(A, matpowR(A, k - 1));
+	Matrix recursion = matpowR(A, k - 1);
+	Matrix result = matmul(A, recursion);
+	delMatrix(&recursion);
+	return result;
 }
 
 Matrix matpowI(Matrix A, unsigned int k) {
