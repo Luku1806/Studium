@@ -32,6 +32,11 @@ void delMatrix(Matrix *m);
 Matrix matcpy(Matrix m);
 
 /**
+ * Compare Matrix A with Matrix B
+ */
+void matcmp(Matrix a, Matrix b);
+
+/**
  *unity matrix
  */
 Matrix matunity(int rows, int cols);
