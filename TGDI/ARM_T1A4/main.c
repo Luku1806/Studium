@@ -6,13 +6,14 @@
  */
 
 #include "include/display.h"
+#include "cToolMod.h"
 
 void printNumbers() {
 	unsigned char num = 0;
 	do {
 		display_set_cursor(0, 0);
 		display_printf("%d", num++);
-		delay1us(500000);
+		delay5ms(1);
 	} while (num);
 }
 
