@@ -119,7 +119,7 @@ Matrix *matplus(Matrix *A, Matrix *B) {
 		exit(-1);
 	}
 	Matrix *result = newMatrix(A->rows, A->cols);
-//Addition
+	//Addition
 	for (int i = 0; i < A->rows; i++) {
 		for (int j = 0; j < A->cols; j++) {
 			result->data[i][j] = A->data[i][j] + B->data[i][j];

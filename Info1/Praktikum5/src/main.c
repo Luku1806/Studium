@@ -217,7 +217,7 @@ void testPowers() {
 }
 
 int main(int argc, char* argv[]) {
-	//testPowers();
+	testPowers();
 	testCompare();
 	return 0;
 }
