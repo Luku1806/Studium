@@ -102,7 +102,6 @@ void calcImage() {
 
 void *calcImageParallel(void *args) {
 	thread_args* targs = (thread_args*) args;
-	printf("Woorking: id:%i, count:%i\n", targs->id, targs->threadCount);
 	if (picBuffer == NULL) {
 		initBuffer();
 	}
@@ -213,7 +212,7 @@ void display() {
 }
 
 void loop() {
-//Calculate time sice last frame
+	//Calculate time sice last frame
 	int t_now = glutGet(GLUT_ELAPSED_TIME);
 	int elapsed = t_now - t_lastFrame;
 	t_lastFrame = t_now;
