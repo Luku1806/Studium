@@ -16,6 +16,8 @@
 //Drawing stuff
 int WINDOW_WIDTH = 800;
 int WINDOW_HEIGHT = 400;
+int PREV_WINDOW_WIDTH = 800;
+int PREV_WINDOW_HEIGHT = 400;
 char windowTitle[25];
 
 int t_lastFrame = 0;
@@ -34,6 +36,7 @@ unsigned char zoomIn = 0;
 unsigned char zoomOut = 0;
 unsigned char resUp = 0;
 unsigned char resDown = 0;
+unsigned char fullscreen = 0;
 
 //Mandelbrot stuff
 int max_iteration = 100;
@@ -249,6 +252,18 @@ void reshape(GLsizei width, GLsizei height) {
 	glutPostRedisplay();
 }
 
+void toggle_fullscreen() {
+	if (fullscreen) {
+		fullscreen = 0;
+		glutReshapeWindow(PREV_WINDOW_WIDTH, PREV_WINDOW_HEIGHT);
+	} else {
+		fullscreen = 1;
+		PREV_WINDOW_WIDTH = WINDOW_WIDTH;
+		PREV_WINDOW_HEIGHT = WINDOW_HEIGHT;
+		glutFullScreen();
+	}
+}
+
 void key_pressed(unsigned char key, int x, int y) {
 	switch (key) {
 	case 's':
@@ -291,6 +306,9 @@ void spec_key_pressed(int key, int x, int y) {
 		break;
 	case GLUT_KEY_RIGHT:
 		key_pressed('d', 0, 0);
+		break;
+	case GLUT_KEY_F11:
+		toggle_fullscreen();
 		break;
 	}
 }
