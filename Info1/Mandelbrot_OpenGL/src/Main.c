@@ -19,6 +19,7 @@ int WINDOW_HEIGHT = 400;
 int PREV_WINDOW_WIDTH = 800;
 int PREV_WINDOW_HEIGHT = 400;
 char windowTitle[25];
+int currentColormode = 0;
 
 int t_lastFrame = 0;
 int t_fpsUpdate = 0;
@@ -196,6 +197,34 @@ void update(int elapsed) {
 	}
 }
 
+void colormode(unsigned char colormode, int x, int y) {
+	switch (colormode) {
+	case 0:
+		glColor3f(picBuffer[x][y], 0, 0);
+		break;
+	case 1:
+		glColor3f(0, picBuffer[x][y], 0);
+		break;
+	case 2:
+		glColor3f(0, 0, picBuffer[x][y]);
+		break;
+	case 3:
+		glColor3f(picBuffer[x][y], picBuffer[x][y], 0);
+		break;
+	case 4:
+		glColor3f(picBuffer[x][y], 0, picBuffer[x][y]);
+		break;
+	case 5:
+		glColor3f(0, picBuffer[x][y], picBuffer[x][y]);
+		break;
+	case 6:
+		glColor3f(picBuffer[x][y], picBuffer[x][y], picBuffer[x][y]);
+		break;
+	default:
+		glColor3f(picBuffer[x][y], 0, 0);
+	}
+}
+
 /* Handler for window-repaint event. Call back when the window first appears and
  whenever the window needs to be re-painted. */
 void display() {
@@ -206,13 +235,7 @@ void display() {
 	glBegin(GL_POINTS);
 	for (int x = 0; x < WINDOW_WIDTH; x++) {
 		for (int y = 0; y < WINDOW_HEIGHT; y++) {
-			glColor3f(picBuffer[x][y], 0, 0);
-			//glColor3f(0, picBuffer[x][y], 0);
-			//glColor3f(0, 0, picBuffer[x][y]);
-			//glColor3f(picBuffer[x][y], picBuffer[x][y], 0);
-			//glColor3f(picBuffer[x][y], 0, picBuffer[x][y]);
-			//glColor3f(0, picBuffer[x][y], picBuffer[x][y]);
-			//glColor3f(picBuffer[x][y], picBuffer[x][y], picBuffer[x][y]);
+			colormode(currentColormode, x, y);
 			glVertex2i(x, y);
 		}
 	}
@@ -295,6 +318,11 @@ void key_pressed(unsigned char key, int x, int y) {
 		break;
 	case 'e':
 		resUp = 1;
+		break;
+	case 'c':
+		currentColormode++;
+		if(currentColormode > 6)
+			currentColormode = 0;
 		break;
 	}
 }
