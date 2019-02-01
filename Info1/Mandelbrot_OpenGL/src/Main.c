@@ -207,6 +207,12 @@ void display() {
 	for (int x = 0; x < WINDOW_WIDTH; x++) {
 		for (int y = 0; y < WINDOW_HEIGHT; y++) {
 			glColor3f(picBuffer[x][y], 0, 0);
+			//glColor3f(0, picBuffer[x][y], 0);
+			//glColor3f(0, 0, picBuffer[x][y]);
+			//glColor3f(picBuffer[x][y], picBuffer[x][y], 0);
+			//glColor3f(picBuffer[x][y], 0, picBuffer[x][y]);
+			//glColor3f(0, picBuffer[x][y], picBuffer[x][y]);
+			//glColor3f(picBuffer[x][y], picBuffer[x][y], picBuffer[x][y]);
 			glVertex2i(x, y);
 		}
 	}
