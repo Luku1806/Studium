@@ -46,7 +46,7 @@ void sierpinski(triangle *tri, int recs) {
 	glVertex2f(tri->x3, tri->y3);
 	glEnd();
 
-	if (recs-- > 0) {
+	if (recs - 1 > 0) {
 
 		int nX1 = (tri->x1 + tri->x2) / 2;
 		int nY1 = (tri->y1 + tri->y2) / 2;
@@ -62,16 +62,16 @@ void sierpinski(triangle *tri, int recs) {
 		triangle newTri3 = { nX1, nY1, tri->x2, tri->y2, nX3, nY3 };
 		triangle newTri4 = { nX2, nY2, nX3, nY3, tri->x3, tri->y3 };
 
-		glColor3f(1, 1, 1);
+		glColor3f(0, 0, 0);
 		glBegin(GL_TRIANGLES);
 		glVertex2f(newTri1.x1, newTri1.y1);
 		glVertex2f(newTri1.x2, newTri1.y2);
 		glVertex2f(newTri1.x3, newTri1.y3);
 		glEnd();
 
-		sierpinski(&newTri2, recs);
-		sierpinski(&newTri3, recs);
-		sierpinski(&newTri4, recs);
+		sierpinski(&newTri2, recs - 1);
+		sierpinski(&newTri3, recs - 1);
+		sierpinski(&newTri4, recs - 1);
 	}
 }
 
